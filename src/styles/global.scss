@@ -1,0 +1,236 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: $font-body;
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  color: $ink;
+  background-color: $cream;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 8% 4%, rgba(244, 162, 184, 0.16), transparent 60%),
+    radial-gradient(ellipse 50% 36% at 94% 30%, rgba(235, 197, 135, 0.18), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 50% 98%, rgba(77, 100, 154, 0.1), transparent 65%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $font-display;
+  font-weight: 700;
+  line-height: 1.45;
+  color: $blue-deep;
+}
+
+.container {
+  width: min(100% - 3rem, $container);
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(4.5rem, 9vw, 7.5rem);
+}
+
+.kicker {
+  font-family: $font-display;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $gold-deep;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  margin-bottom: 0.4rem;
+}
+
+.section-lead {
+  max-width: 62ch;
+  color: rgba(35, 41, 74, 0.78);
+  font-size: 1.1rem;
+  margin-top: 1.25rem;
+}
+
+.section-head {
+  text-align: center;
+
+  .section-lead {
+    margin-inline: auto;
+  }
+}
+
+// বোতাম
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.1rem;
+  border-radius: 999px;
+  font-family: $font-display;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.35s $ease-lux,
+    box-shadow 0.35s $ease-lux,
+    background-color 0.35s,
+    border-color 0.35s;
+
+  &--primary {
+    color: #fff;
+    background: linear-gradient(135deg, $pink-deep 0%, $pink 100%);
+    box-shadow: 0 14px 34px -14px rgba(233, 127, 160, 0.8);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 44px -14px rgba(233, 127, 160, 0.9);
+    }
+  }
+
+  &--ghost {
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-3px);
+    }
+  }
+
+  &--gold {
+    color: $blue-deep;
+    border: 1.5px solid rgba(198, 168, 117, 0.65);
+    background: rgba(198, 168, 117, 0.1);
+
+    &:hover {
+      background: rgba(198, 168, 117, 0.2);
+      transform: translateY(-3px);
+    }
+  }
+}
+
+::selection {
+  background: rgba(233, 127, 160, 0.35);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: $ivory;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient($gold, $pink);
+  border-radius: 8px;
+  border: 3px solid $ivory;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(233, 127, 160, 0.6);
+  outline-offset: 3px;
+}
+
+// ইন্ট্রো পর্দা — JS ছাড়াও CSS অ্যানিমেশনে নিজে নিজে সরে যায়
+.intro-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, $ivory, $cream);
+  animation: intro-out 0.8s ease 0.9s forwards;
+  pointer-events: none;
+
+  span {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: $gold-deep;
+    animation: intro-pulse 1.2s ease infinite alternate;
+  }
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes intro-pulse {
+  from {
+    opacity: 0.65;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// GSAP শব্দ-বিভাজনের জন্য (JS দিয়ে তৈরি হয়, তাই গ্লোবাল স্টাইল)
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.word__inner {
+  display: inline-block;
+  will-change: transform;
+}

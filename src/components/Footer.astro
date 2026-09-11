@@ -1,0 +1,128 @@
+---
+import { toBanglaDigits } from '../utils/bangla';
+
+const year = toBanglaDigits(2026);
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img
+          class="footer__avatar"
+          src="/images/radha.webp"
+          alt="শ্রীরাধা"
+          width="76"
+          height="76"
+          loading="lazy"
+        />
+        <div>
+          <p class="footer__title">শ্রীশ্রীরাধার অষ্টোত্তর শতনাম</p>
+          <p class="footer__tagline">রাধা-নাম স্মরণে কল্যাণ — ॥ রাধে রাধে ॥</p>
+        </div>
+      </div>
+      <nav class="footer__nav" aria-label="ফুটার মেনু">
+        <a href="/#namavali">নামাবলী</a>
+        <a href="/#parichiti">পরিচিতি</a>
+        <a href="/#top">উপরে ফিরুন</a>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p>© {year} শ্রীশ্রীরাধার অষ্টোত্তর শতনাম · সর্বস্বত্ব সংরক্ষিত</p>
+      <p class="footer__mantra">॥ শ্রী রাধে শ্রী রাধে ॥</p>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+
+  .footer {
+    position: relative;
+    margin-top: clamp(3rem, 8vw, 6rem);
+    background: linear-gradient(165deg, #26315c 0%, $blue-deep 60%, #1b2344 100%);
+    color: $ivory;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, $gold 18%, $pink 50%, $gold 82%, transparent);
+    }
+
+    &__top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.6rem;
+      padding-block: 3.4rem 2.6rem;
+    }
+
+    &__brand {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    &__avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(235, 197, 135, 0.9);
+      box-shadow:
+        0 0 0 4px rgba(235, 197, 135, 0.18),
+        0 10px 30px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    &__title {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 1.18rem;
+      color: #fff;
+    }
+
+    &__tagline {
+      font-size: 0.98rem;
+      color: rgba(251, 241, 227, 0.75);
+      margin-top: 0.25rem;
+    }
+
+    &__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+
+      a {
+        color: rgba(251, 241, 227, 0.85);
+        text-decoration: none;
+        font-family: $font-display;
+        transition: color 0.3s;
+
+        &:hover {
+          color: $gold-light;
+        }
+      }
+    }
+
+    &__bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.8rem;
+      padding-block: 1.4rem 2rem;
+      border-top: 1px solid rgba(235, 197, 135, 0.22);
+      font-size: 0.92rem;
+      color: rgba(251, 241, 227, 0.65);
+    }
+
+    &__mantra {
+      font-family: $font-display;
+      color: rgba(235, 197, 135, 0.9);
+    }
+  }
+</style>

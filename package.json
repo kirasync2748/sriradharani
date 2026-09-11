@@ -1,0 +1,26 @@
+{
+  "name": "sriradharani",
+  "version": "1.0.0",
+  "description": "শ্রীশ্রীরাধার অষ্টোত্তর শতনাম — শ্রীরাধার ১০৮ পবিত্র নামের সম্পূর্ণ বাংলা ওয়েবসাইট",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^9.0.0",
+    "@fontsource-variable/noto-sans-bengali": "^5.0.0",
+    "@fontsource-variable/noto-serif-bengali": "^5.0.0",
+    "astro": "^5.12.0",
+    "gsap": "^3.12.5"
+  },
+  "devDependencies": {
+    "sass": "^1.80.0"
+  }
+}

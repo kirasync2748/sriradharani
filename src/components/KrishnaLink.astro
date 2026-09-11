@@ -1,0 +1,93 @@
+---
+// শ্রীশ্রীকৃষ্ণের অষ্টোত্তর শতনাম — বাইরের সংযোগ
+const KRISHNA_URL = 'https://lord-krishna-wine.vercel.app/';
+---
+
+<section class="krishna-link" aria-label="শ্রীশ্রীকৃষ্ণের অষ্টোত্তর শতনাম">
+  <div class="container">
+    <p class="krishna-link__hint" data-reveal>শ্রীকৃষ্ণের পবিত্র নামও স্মরণ করুন</p>
+    <a class="krishna-link__btn" href={KRISHNA_URL} target="_blank" rel="noopener noreferrer" data-reveal>
+      <span class="krishna-link__title">শ্রীশ্রীকৃষ্ণের অষ্টোত্তর শতনাম</span>
+      <span class="krishna-link__arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+
+  .krishna-link {
+    padding: 3.5rem 0 4.5rem;
+    text-align: center;
+    background: radial-gradient(ellipse 45% 70% at 50% 0%, rgba(46, 59, 104, 0.07), transparent 70%);
+
+    &__hint {
+      font-family: $font-display;
+      font-weight: 600;
+      color: $gold-deep;
+      margin-bottom: 1.2rem;
+    }
+
+    &__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.05rem 1.6rem;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, $blue 0%, $blue-deep 100%);
+      box-shadow: 0 18px 44px -16px rgba(46, 59, 104, 0.6);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.45s $ease-lux,
+        box-shadow 0.45s $ease-lux;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -60%;
+        width: 45%;
+        background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+        transform: skewX(-18deg);
+        transition: left 0.7s $ease-lux;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 26px 54px -18px rgba(46, 59, 104, 0.65);
+
+        &::before {
+          left: 115%;
+        }
+      }
+    }
+
+    &__title {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+      line-height: 1.6;
+    }
+
+    &__arrow {
+      flex: none;
+      display: inline-grid;
+      place-items: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 1.05rem;
+      transition: transform 0.45s $ease-lux;
+    }
+
+    &__btn:hover &__arrow {
+      transform: translate(2px, -2px);
+    }
+  }
+</style>

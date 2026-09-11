@@ -1,0 +1,207 @@
+---
+import { nameLists, prayerVerse } from '../data/names';
+import { toBanglaDigits } from '../utils/bangla';
+import OrnamentDivider from './OrnamentDivider.astro';
+---
+
+<section class="names section" id="namavali">
+  <div class="container">
+    <header class="section-head" data-reveal>
+      <p class="kicker">॥ পবিত্র স্মরণ ॥</p>
+      <h2 class="section-title">অষ্টোত্তর শতনাম</h2>
+      <OrnamentDivider />
+      <p class="section-lead">
+        প্রণাম মন্ত্রটি পাঠ করে ধ্যান দিয়ে নামগুলো স্মরণ করুন — নিচে দুই পাঠে
+        শ্রীরাধার একশত আটটি পবিত্র নাম দেওয়া হলো।
+      </p>
+    </header>
+
+    <blockquote class="verse" data-reveal>
+      <p class="verse__label">॥ {prayerVerse.label} ॥</p>
+      {prayerVerse.lines.map((line) => <p class="verse__line">{line}</p>)}
+    </blockquote>
+
+    {
+      nameLists.map((list) => (
+        <div class="names-list">
+          <h3 class="names-list__title" data-reveal>
+            {list.title}
+            <span class="names-list__count">{toBanglaDigits(list.names.length)} নাম</span>
+          </h3>
+          <div class="names-box">
+            {list.names.map((n) => (
+              <div class="name-row">
+                <span class="name-row__num">{toBanglaDigits(n.number)}</span>
+                <span class="name-row__name">{n.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+  @use '@styles/mixins' as *;
+
+  .names {
+    background:
+      radial-gradient(ellipse 50% 30% at 85% 0%, rgba(244, 162, 184, 0.12), transparent 60%),
+      radial-gradient(ellipse 40% 30% at 10% 100%, rgba(235, 197, 135, 0.14), transparent 60%);
+  }
+
+  .verse {
+    margin: 3rem auto 0;
+    max-width: 42rem;
+    text-align: center;
+    padding: 2.4rem 1.8rem;
+    border-radius: 24px;
+    background: linear-gradient(160deg, $white 0%, #fff8ef 100%);
+    border: 1px solid rgba(198, 168, 117, 0.5);
+    box-shadow: $shadow-soft;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '॥';
+      position: absolute;
+      font-family: $font-display;
+      font-size: 1.6rem;
+      color: rgba(198, 168, 117, 0.8);
+    }
+
+    &::before {
+      top: 0.6rem;
+      left: 1.2rem;
+    }
+
+    &::after {
+      bottom: 0.6rem;
+      right: 1.2rem;
+    }
+
+    &__label {
+      font-family: $font-display;
+      font-weight: 600;
+      color: $gold-deep;
+      margin-bottom: 0.9rem;
+    }
+
+    &__line {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+      color: $blue-deep;
+      line-height: 2.1;
+    }
+  }
+
+  .names-list {
+    margin-top: 4.5rem;
+
+    &__title {
+      text-align: center;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    &__count {
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.25rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(198, 168, 117, 0.16);
+      border: 1px solid rgba(198, 168, 117, 0.5);
+      color: $gold-deep;
+    }
+  }
+
+  .names-box {
+    border-radius: 24px;
+    background: linear-gradient(160deg, $white 0%, #fff8ef 100%);
+    border: 1px solid rgba(198, 168, 117, 0.45);
+    box-shadow: $shadow-soft;
+    padding: clamp(0.4rem, 2vw, 1rem) clamp(0.2rem, 1.5vw, 0.9rem);
+
+    @include respond-min(lg) {
+      columns: 2;
+      column-gap: 1.8rem;
+      column-rule: 1px dashed rgba(198, 168, 117, 0.4);
+    }
+  }
+
+  .name-row {
+    break-inside: avoid;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.62rem 0.85rem;
+    border-bottom: 1px dashed rgba(198, 168, 117, 0.3);
+    border-radius: 12px;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s $ease-lux;
+
+    &:hover {
+      background: rgba(244, 162, 184, 0.14);
+      transform: translateX(4px);
+    }
+
+    &__num {
+      flex: none;
+      display: inline-grid;
+      place-items: center;
+      width: 1.95rem;
+      height: 1.95rem;
+      border-radius: 50%;
+      font-family: $font-display;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: $gold-deep;
+      background: rgba(198, 168, 117, 0.15);
+      border: 1px solid rgba(198, 168, 117, 0.55);
+    }
+
+    &__name {
+      font-family: $font-display;
+      font-weight: 600;
+      font-size: 1.06rem;
+      line-height: 1.9;
+      color: $blue-deep;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rows = gsap.utils.toArray('.name-row');
+
+  if (rows.length && !prefersReduced) {
+    gsap.set(rows, { y: 22, autoAlpha: 0 });
+    ScrollTrigger.batch(rows, {
+      start: 'top 94%',
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          stagger: 0.025,
+          ease: 'power3.out',
+          overwrite: true,
+        }),
+    });
+  }
+</script>

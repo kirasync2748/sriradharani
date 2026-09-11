@@ -1,0 +1,66 @@
+---
+import '@fontsource-variable/noto-serif-bengali';
+import '@fontsource-variable/noto-sans-bengali';
+import '../styles/global.scss';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  hideChrome?: boolean;
+}
+
+const {
+  title = 'শ্রীশ্রীরাধার অষ্টোত্তর শতনাম ॥ রাধে রাধে',
+  description = 'বৃন্দাবনের রাণী শ্রীরাধার একশত আটটি পবিত্র নামের স্মরণ ও বন্দনা — প্রণাম মন্ত্রসহ বাংলা ও সংস্কৃত পাঠ।',
+  hideChrome = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fdf6ec" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="bn_BD" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/images/radha-krishna.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    {!hideChrome && <div class="intro-veil"><span>॥ রাধে রাধে ॥</span></div>}
+    {!hideChrome && <Navbar />}
+    <main>
+      <slot />
+    </main>
+    {!hideChrome && <Footer />}
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReduced) {
+        gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
+          gsap.from(el, {
+            y: 36,
+            autoAlpha: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

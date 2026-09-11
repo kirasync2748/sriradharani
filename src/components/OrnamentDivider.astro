@@ -1,0 +1,38 @@
+---
+interface Props {
+  align?: 'center' | 'left';
+}
+
+const { align = 'center' } = Astro.props;
+---
+
+<div class={`ornament ornament--${align}`} aria-hidden="true">
+  <svg viewBox="0 0 220 24" width="220" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="orn-line" x1="0" y1="0" x2="220" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#C6A875" stop-opacity="0"></stop>
+        <stop offset="0.5" stop-color="#C6A875"></stop>
+        <stop offset="1" stop-color="#C6A875" stop-opacity="0"></stop>
+      </linearGradient>
+    </defs>
+    <path d="M0 12h84" stroke="url(#orn-line)" stroke-width="1.2"></path>
+    <path d="M136 12h84" stroke="url(#orn-line)" stroke-width="1.2"></path>
+    <path d="M92 12c3-4.5 11-4.5 14 0c-3 4.5-11 4.5-14 0z" fill="#E97FA0" opacity="0.85"></path>
+    <path d="M128 12c-3-4.5-11-4.5-14 0c3 4.5 11 4.5 14 0z" fill="#E97FA0" opacity="0.85"></path>
+    <path d="M110 3c4.5 5.5 4.5 12.5 0 18c-4.5-5.5-4.5-12.5 0-18z" fill="#C6A875"></path>
+    <circle cx="90" cy="12" r="1.5" fill="#C6A875"></circle>
+    <circle cx="130" cy="12" r="1.5" fill="#C6A875"></circle>
+  </svg>
+</div>
+
+<style lang="scss">
+  .ornament {
+    display: flex;
+    margin-top: 0.9rem;
+    opacity: 0.9;
+  }
+
+  .ornament--center {
+    justify-content: center;
+  }
+</style>

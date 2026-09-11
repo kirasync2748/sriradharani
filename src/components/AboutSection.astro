@@ -1,0 +1,154 @@
+---
+import OrnamentDivider from './OrnamentDivider.astro';
+---
+
+<section class="about section" id="parichiti">
+  <div class="container about__grid">
+    <div class="about__figure-wrap" data-reveal>
+      <div class="about__figure">
+        <img src="/images/radha.webp" alt="শ্রীরাধার প্রতিকৃতি" loading="lazy" decoding="async" />
+        <p class="about__caption">॥ শ্রীরাধা ॥</p>
+      </div>
+    </div>
+    <div class="about__body">
+      <header data-reveal>
+        <p class="kicker">॥ পরিচিতি ॥</p>
+        <h2 class="section-title">শ্রীরাধা — প্রেমের স্বরূপ</h2>
+        <OrnamentDivider align="left" />
+      </header>
+      <p data-reveal>
+        শ্রীরাধা বৃন্দাবনের অধিষ্ঠাত্রী শক্তি, মহারাজ ভৃষভানুর লালিতা কন্যা। শ্রীকৃষ্ণের
+        প্রাণ-প্রিয়া, নিকুঞ্জের রাণী — শাস্ত্রে তাঁকে ভক্তি-প্রেমের চরম প্রতিমূর্তি বলা হয়েছে।
+        যিনি স্বয়ং প্রেম-স্বরূপিণী, তাঁর নাম-স্মরণে সাধকের হৃদয়ে প্রেমের দীপ জ্বলে ওঠে।
+      </p>
+      <p data-reveal>
+        অষ্টোত্তর শতনাম অর্থ একশত আটটি নাম। শাস্ত্রসম্মত গণনায় ১০৮ একটি পবিত্র পূর্ণ সংখ্যা —
+        বারো রাশির সঙ্গে নবগ্রহের সমাবেশ এবং একশত আটটি উপনিষদের স্মারক। নামগুলি একবারে,
+        ধারাবাহিকভাবে অথবা প্রতিদিন অল্প করে পাঠ করা যায় — নিয়ম কঠোর নয়, ভাব পবিত্র থাকলেই
+        ফল অটল।
+      </p>
+      <p data-reveal>
+        কলিযুগে নাম-সংকীর্তনই সহজতম সাধনা। যে হৃদয় রাধা-নাম স্মরণ করে, তার অন্তর থেকে অহং ক্ষয়
+        হয়ে প্রেম প্রকাশিত হয়।
+      </p>
+      <ul class="about__chips" data-reveal>
+        <li>ভৃষভানুনন্দিনী</li>
+        <li>নিকুঞ্জেশ্বরী</li>
+        <li>প্রেমস্বরূপিণী</li>
+        <li>গোলোকেশ্বরী</li>
+        <li>কৃষ্ণ-প্রিয়া</li>
+        <li>বৃন্দাবনেশ্বরী</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+  @use '@styles/mixins' as *;
+
+  .about {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(77, 100, 154, 0.07) 18%,
+      rgba(77, 100, 154, 0.07) 82%,
+      transparent 100%
+    );
+
+    &__grid {
+      display: grid;
+      gap: clamp(2.6rem, 6vw, 5rem);
+      align-items: center;
+      grid-template-columns: 1fr;
+    }
+
+    @include respond-min(lg) {
+      &__grid {
+        grid-template-columns: 0.85fr 1.15fr;
+      }
+    }
+
+    &__figure {
+      position: relative;
+      max-width: 26rem;
+      margin-inline: auto;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 1.4rem -1.4rem -1.4rem 1.4rem;
+        border-radius: 28px;
+        border: 2px solid rgba(233, 127, 160, 0.5);
+      }
+
+      img {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        border-radius: 28px;
+        border: 10px solid $white;
+        box-shadow: $shadow-soft;
+        object-fit: cover;
+      }
+    }
+
+    &__caption {
+      text-align: center;
+      margin-top: 1.1rem;
+      font-family: $font-display;
+      font-weight: 600;
+      color: $gold-deep;
+    }
+
+    &__body {
+      p {
+        color: rgba(35, 41, 74, 0.82);
+      }
+
+      p + p {
+        margin-top: 1.05rem;
+      }
+
+      header {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    &__chips {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.9rem;
+
+      li {
+        padding: 0.42rem 1.15rem;
+        border-radius: 999px;
+        background: rgba(198, 168, 117, 0.14);
+        border: 1px solid rgba(198, 168, 117, 0.5);
+        font-family: $font-display;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $blue-deep;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReduced) {
+    gsap.to('.about__figure', {
+      yPercent: 10,
+      ease: 'none',
+      scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: 0.8 },
+    });
+  }
+</script>

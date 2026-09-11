@@ -1,0 +1,309 @@
+<section class="hero" id="top">
+  <div class="hero__media">
+    <img
+      src="/images/radha-krishna.webp"
+      alt="নিকুঞ্জবনে শ্রীরাধা-শ্রীকৃষ্ণ"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="hero__veil" aria-hidden="true"></div>
+  <canvas class="hero__petals" id="petals-canvas" aria-hidden="true"></canvas>
+  <div class="hero__content container">
+    <p class="hero__kicker">॥ রাধে রাধে ॥</p>
+    <h1 class="hero__title" id="hero-title">শ্রীশ্রীরাধার অষ্টোত্তর শতনাম</h1>
+    <p class="hero__subtitle">
+      বৃন্দাবনের রাণী শ্রীরাধার একশত আটটি পবিত্র নামের স্মরণ ও বন্দনা —
+      যে নামের কৃপায় প্রেমের পথ আলোকিত হয়।
+    </p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#namavali">নামাবলী দেখুন</a>
+      <a class="btn btn--ghost" href="#parichiti">পরিচিতি পড়ুন</a>
+    </div>
+  </div>
+  <a class="hero__scroll" href="#namavali" aria-label="নিচে দেখুন">
+    <span class="hero__scroll-mouse" aria-hidden="true"></span>
+  </a>
+</section>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+  @use '@styles/mixins' as *;
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+
+    &__media {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      will-change: transform;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 32%;
+      }
+    }
+
+    &__veil {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(19, 25, 50, 0.5) 0%,
+          rgba(19, 25, 50, 0.22) 42%,
+          rgba(19, 25, 50, 0.32) 68%,
+          rgba(253, 246, 236, 0.96) 100%
+        ),
+        radial-gradient(ellipse at 50% 40%, rgba(46, 59, 104, 0.4), transparent 62%);
+    }
+
+    &__petals {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &__content {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding-top: 6rem;
+      padding-bottom: 5rem;
+    }
+
+    &__kicker {
+      font-family: $font-display;
+      font-weight: 600;
+      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+      color: $gold-light;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+      margin-bottom: 1.1rem;
+    }
+
+    &__title {
+      color: #fff;
+      font-size: clamp(2.15rem, 6.6vw, 4.75rem);
+      font-weight: 800;
+      line-height: 1.45;
+      text-shadow: 0 4px 34px rgba(0, 0, 0, 0.45);
+    }
+
+    &__subtitle {
+      max-width: 48ch;
+      margin: 1.5rem auto 0;
+      font-size: clamp(1rem, 2.1vw, 1.22rem);
+      line-height: 2;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    &__cta {
+      margin-top: 2.6rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    &__scroll {
+      position: absolute;
+      left: 50%;
+      bottom: 2rem;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    &__scroll-mouse {
+      display: block;
+      width: 26px;
+      height: 42px;
+      border: 2px solid rgba(169, 132, 79, 0.95);
+      border-radius: 999px;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        width: 4px;
+        height: 9px;
+        margin-left: -2px;
+        border-radius: 4px;
+        background: rgba(169, 132, 79, 0.95);
+        animation: hero-wheel 1.8s ease-in-out infinite;
+      }
+    }
+  }
+
+  @keyframes hero-wheel {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    70% {
+      transform: translateY(13px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // শিরোনামকে শব্দে ভাগ করা (মাস্ক-রিভিল অ্যানিমেশনের জন্য)
+  const title = document.getElementById('hero-title');
+  if (title?.textContent) {
+    const words = title.textContent.trim().split(/\s+/);
+    title.innerHTML = words
+      .map((w) => `<span class="word"><span class="word__inner">${w}</span></span>`)
+      .join(' ');
+  }
+
+  // ভাসমান পঙ্খপাত (ক্যানভাস)
+  const canvas = document.getElementById('petals-canvas') as HTMLCanvasElement | null;
+  const ctx = canvas?.getContext('2d') ?? null;
+
+  if (canvas && ctx && !prefersReduced) {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const colors = [
+      'rgba(244,162,184,0.85)',
+      'rgba(233,127,160,0.8)',
+      'rgba(251,218,205,0.9)',
+      'rgba(235,197,135,0.7)',
+    ];
+    let w = 0;
+    let h = 0;
+    let raf = 0;
+    let running = false;
+
+    type Petal = {
+      x: number;
+      y: number;
+      s: number;
+      sp: number;
+      ph: number;
+      fq: number;
+      rot: number;
+      vr: number;
+      c: string;
+    };
+    const petals: Petal[] = [];
+
+    const resize = () => {
+      if (!canvas || !ctx) return;
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    const COUNT = 24;
+    for (let i = 0; i < COUNT; i++) {
+      petals.push({
+        x: Math.random() * w,
+        y: Math.random() * h * 1.5 - h * 0.25,
+        s: 5 + Math.random() * 9,
+        sp: 0.35 + Math.random() * 0.8,
+        ph: Math.random() * Math.PI * 2,
+        fq: 0.4 + Math.random() * 0.8,
+        rot: Math.random() * Math.PI * 2,
+        vr: (Math.random() - 0.5) * 0.02,
+        c: colors[Math.floor(Math.random() * colors.length)] as string,
+      });
+    }
+
+    const draw = (t: number) => {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, w, h);
+      for (const p of petals) {
+        p.y += p.sp;
+        p.x += Math.sin((t / 1400) * p.fq + p.ph) * 0.45;
+        p.rot += p.vr;
+        if (p.y - p.s > h) {
+          p.y = -p.s - 4;
+          p.x = Math.random() * w;
+        }
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.c;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.s, p.s * 0.55, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+      raf = requestAnimationFrame(draw);
+    };
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(draw);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    document.addEventListener('visibilitychange', () => {
+      document.hidden ? stop() : start();
+    });
+
+    start();
+  }
+
+  // প্রবেশ-অ্যানিমেশন ও প্যারালাক্স
+  if (!prefersReduced) {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from('.hero__media', { scale: 1.14, duration: 2.2, ease: 'power2.out' }, 0.15)
+      .from('.hero__veil', { opacity: 0, duration: 1.4 }, 0.15)
+      .from('.hero__kicker', { y: 24, autoAlpha: 0, duration: 0.9 }, 0.55)
+      .from('.hero__title .word__inner', { yPercent: 120, duration: 1.1, stagger: 0.12, ease: 'power4.out' }, 0.7)
+      .from('.hero__subtitle', { y: 28, autoAlpha: 0, duration: 0.9 }, 1.15)
+      .from('.hero__cta', { y: 24, autoAlpha: 0, duration: 0.8 }, 1.35)
+      .from('.hero__scroll', { autoAlpha: 0, duration: 0.8 }, 1.7);
+
+    gsap.to('.hero__media', {
+      yPercent: 16,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 },
+    });
+
+    gsap.to('.hero__content', {
+      yPercent: -12,
+      autoAlpha: 0.25,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 30%', scrub: 0.6 },
+    });
+  }
+</script>

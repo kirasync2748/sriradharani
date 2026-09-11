@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ErrorPage from '../components/ErrorPage.astro';
+---
+
+<BaseLayout
+  title="সার্ভারে সাময়িক বিঘ্ন — ৫০০"
+  description="সার্ভারে সাময়িক সমস্যা হয়েছে — একটু পরে আবার চেষ্টা করুন।"
+  hideChrome
+>
+  <ErrorPage
+    code="৫০০"
+    title="সার্ভারে সাময়িক বিঘ্ন"
+    message="যেন কুঞ্জবনে হঠাৎ মেঘ জমেছে — কিছুক্ষণেই আবার সব আলোয় ভরে যাবে। অনুগ্রহ করে একটু পরে আবার চেষ্টা করুন।"
+    showNamavali={false}
+  />
+</BaseLayout>

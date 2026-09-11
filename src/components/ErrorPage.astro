@@ -1,0 +1,139 @@
+---
+interface Props {
+  code: string;
+  title: string;
+  message: string;
+  showNamavali?: boolean;
+}
+
+const { code, title, message, showNamavali = true } = Astro.props;
+---
+
+<section class="error">
+  <div class="error__media">
+    <img
+      src="/images/radha-krishna.webp"
+      alt="নিকুঞ্জবনে শ্রীরাধা-শ্রীকৃষ্ণ"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+  <div class="error__veil" aria-hidden="true"></div>
+  <div class="error__inner container">
+    <p class="error__kicker">॥ রাধে রাধে ॥</p>
+    <p class="error__code">{code}</p>
+    <h1 class="error__title">{title}</h1>
+    <p class="error__msg">{message}</p>
+    <div class="error__actions">
+      <a class="btn btn--primary" href="/">মূলপৃষ্ঠায় ফিরুন</a>
+      {showNamavali && <a class="btn btn--ghost" href="/#namavali">নামাবলী দেখুন</a>}
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+
+  .error {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
+    padding: 5rem 1.5rem 4rem;
+
+    &__media {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+      }
+    }
+
+    &__veil {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(19, 25, 50, 0.62) 0%,
+          rgba(19, 25, 50, 0.45) 45%,
+          rgba(19, 25, 50, 0.72) 100%
+        ),
+        radial-gradient(ellipse at 50% 45%, rgba(46, 59, 104, 0.35), transparent 70%);
+    }
+
+    &__inner {
+      max-width: 46rem;
+    }
+
+    &__kicker {
+      font-family: $font-display;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: $gold-light;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    &__code {
+      font-family: $font-display;
+      font-size: clamp(5.5rem, 18vw, 9.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(140deg, $gold-light 10%, $pink 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.4));
+    }
+
+    &__title {
+      color: #fff;
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      line-height: 1.5;
+    }
+
+    &__msg {
+      margin: 1.3rem auto 0;
+      max-width: 42ch;
+      font-size: 1.08rem;
+      line-height: 2;
+      color: rgba(255, 255, 255, 0.92);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    &__actions {
+      margin-top: 2.4rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReduced) {
+    gsap
+      .timeline({ defaults: { ease: 'power3.out' } })
+      .from('.error__media', { scale: 1.12, duration: 1.8, ease: 'power2.out' }, 0)
+      .from('.error__kicker', { y: 18, autoAlpha: 0, duration: 0.7 }, 0.3)
+      .from('.error__code', { scale: 0.92, autoAlpha: 0, duration: 1, ease: 'power4.out' }, 0.45)
+      .from('.error__title', { y: 22, autoAlpha: 0, duration: 0.8 }, 0.75)
+      .from('.error__msg', { y: 20, autoAlpha: 0, duration: 0.8 }, 0.9)
+      .from('.error__actions > *', { y: 18, autoAlpha: 0, duration: 0.7, stagger: 0.12 }, 1.05);
+  }
+</script>

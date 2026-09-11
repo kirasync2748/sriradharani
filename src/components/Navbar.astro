@@ -1,0 +1,214 @@
+<header class="nav" id="site-nav">
+  <div class="nav__inner container">
+    <a class="nav__brand" href="/">
+      <img class="nav__brand-img" src="/favicon.png" alt="শ্রীরাধা" width="40" height="40" />
+      <span class="nav__brand-text">
+        <span class="nav__brand-full">শ্রীশ্রীরাধার অষ্টোত্তর শতনাম</span>
+        <span class="nav__brand-short">রাধা নামাবলী</span>
+      </span>
+    </a>
+    <nav class="nav__links" id="nav-links" aria-label="প্রধান মেনু">
+      <a href="/#namavali">নামাবলী</a>
+      <a href="/#parichiti">পরিচিতি</a>
+    </nav>
+    <button
+      class="nav__toggle"
+      id="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="মেনু খুলুন বা বন্ধ করুন"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+  @use '@styles/mixins' as *;
+
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    color: #fff;
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease,
+      box-shadow 0.4s ease;
+
+    &.is-scrolled {
+      color: $blue-deep;
+      background: rgba(253, 246, 236, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px -18px rgba(46, 59, 104, 0.45);
+    }
+
+    &__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-block: 0.75rem;
+    }
+
+    &__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      line-height: 1.35;
+    }
+
+    &__brand-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(235, 197, 135, 0.9);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.22);
+      object-fit: cover;
+    }
+
+    &__brand-text {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 1.02rem;
+    }
+
+    &__brand-full {
+      display: inline;
+    }
+
+    &__brand-short {
+      display: none;
+    }
+
+    &__links {
+      display: inline-flex;
+      gap: 1.8rem;
+
+      a {
+        position: relative;
+        font-family: $font-display;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 100%;
+          bottom: -6px;
+          height: 2px;
+          background: linear-gradient(90deg, $gold-light, $pink-deep);
+          transition: right 0.35s ease;
+        }
+
+        &:hover::after {
+          right: 0;
+        }
+      }
+    }
+
+    &__toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+
+      span {
+        width: 24px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+      }
+    }
+
+    @include respond(md) {
+      &__toggle {
+        display: inline-flex;
+      }
+
+      &__brand-full {
+        display: none;
+      }
+
+      &__brand-short {
+        display: inline;
+      }
+
+      &__links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(253, 246, 236, 0.97);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color: $blue-deep;
+        box-shadow: 0 18px 30px -20px rgba(46, 59, 104, 0.4);
+
+        a {
+          padding: 0.9rem 1.5rem;
+          border-bottom: 1px solid rgba(198, 168, 117, 0.25);
+
+          &::after {
+            display: none;
+          }
+        }
+      }
+
+      &.is-open &__links {
+        display: flex;
+      }
+
+      &.is-open &__toggle {
+        span:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+
+        span:nth-child(2) {
+          opacity: 0;
+        }
+
+        span:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+
+  const onScroll = () => nav?.classList.toggle('is-scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const closeMenu = () => {
+    nav?.classList.remove('is-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(Boolean(open)));
+  });
+
+  links?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+</script>
