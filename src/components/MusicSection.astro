@@ -1,0 +1,159 @@
+<section class="music section" id="sangeet" data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker">ভক্তির সুরে কিছুক্ষণ</p>
+      <h2 class="section-title">শ্রীরাধার সঙ্গীত</h2>
+      <p class="section-lead">
+        শ্রীরাধা ও শ্রীকৃষ্ণের নাম স্মরণে কয়েকটি শান্ত সুর। মন দিয়ে শুনুন, ইচ্ছেমতো বিরতি দিন—আর ভালো লাগলে আপনার সঙ্গে রাখার জন্য গানটি ডাউনলোড করে নিন।
+      </p>
+    </div>
+
+    <div class="music__player" data-player>
+      <div class="music__art">
+        <img src="/images/radha.webp" alt="শ্রীরাধার মনোমুগ্ধকর প্রতিকৃতি" />
+        <div class="music__art-overlay" aria-hidden="true"></div>
+        <span class="music__art-caption">রাধে রাধে</span>
+      </div>
+
+      <div class="music__details">
+        <p class="music__eyebrow">এখন বাজছে</p>
+        <h3 class="music__title" data-current-title>মুরলী ওয়ালে শ্যাম</h3>
+        <p class="music__artist">ভক্তিমূলক সঙ্গীত</p>
+
+        <audio data-audio preload="metadata">
+          <source src="/audio/Murli%20Wale%20Shyam.m4a" type="audio/mp4" />
+        </audio>
+
+        <div class="music__timeline">
+          <span data-current-time>০:০০</span>
+          <input data-progress type="range" min="0" max="100" value="0" step="0.1" aria-label="গানের অগ্রগতি" />
+          <span data-duration>০:০০</span>
+        </div>
+
+        <div class="music__controls">
+          <button class="music__control music__control--main" type="button" data-play aria-label="গান চালান">
+            <span class="music__play-icon" aria-hidden="true">▶</span>
+          </button>
+          <label class="music__volume">
+            <span aria-hidden="true">ভলিউম</span>
+            <input data-volume type="range" min="0" max="1" value="0.8" step="0.05" aria-label="ভলিউম" />
+          </label>
+          <a class="btn btn--gold music__download" data-download download href="/audio/Murli%20Wale%20Shyam.m4a">ডাউনলোড করুন</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="music__note">
+      এই গানগুলি AI-সহায়িত সঙ্গীত সরঞ্জামের মাধ্যমে তৈরি। সৃজনশীল ভাবনা, সঙ্গীতের নির্দেশনা, প্রযোজনা এবং চূড়ান্ত নির্বাচন আমার নিজের।
+      <a href="https://github.com/kirasync2748/sriradharani" target="_blank" rel="noreferrer">GitHub Repo দেখুন</a>
+    </p>
+
+    <div class="music__playlist" aria-label="গানের তালিকা">
+      <button class="music__track is-active" type="button" data-track data-title="মুরলী ওয়ালে শ্যাম" data-src="/audio/Murli%20Wale%20Shyam.m4a">
+        <span class="music__track-number">০১</span>
+        <span class="music__track-copy"><strong>মুরলী ওয়ালে শ্যাম</strong><small>ভক্তিমূলক সঙ্গীত</small></span>
+        <span class="music__track-action" aria-hidden="true">▶</span>
+      </button>
+      <button class="music__track" type="button" data-track data-title="রাধে রাধে" data-src="/audio/Radhe%20Radhe.m4a">
+        <span class="music__track-number">০২</span>
+        <span class="music__track-copy"><strong>রাধে রাধে</strong><small>ভক্তিমূলক সঙ্গীত</small></span>
+        <span class="music__track-action" aria-hidden="true">▶</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '@styles/variables' as *;
+
+  .music {
+    background: rgba(251, 241, 227, 0.6);
+
+    &__player {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.7fr) 1.6fr;
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: center;
+      max-width: 920px;
+      margin: 3rem auto 1.5rem;
+      padding: clamp(1.25rem, 4vw, 2.25rem);
+      border: 1px solid rgba(198, 168, 117, 0.32);
+      border-radius: 1.75rem;
+      background: rgba(255, 253, 249, 0.78);
+      box-shadow: $shadow-soft;
+    }
+
+    &__art {
+      position: relative;
+      aspect-ratio: 1;
+      max-width: 250px;
+      margin-inline: auto;
+      overflow: hidden;
+      border: 6px solid rgba(255, 253, 249, 0.9);
+      border-radius: 50%;
+      background: $blue-deep;
+      box-shadow: 0 18px 35px -18px rgba(46, 59, 104, 0.75), 0 0 0 1px rgba(198, 168, 117, 0.45);
+    }
+
+    &__art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; filter: saturate(0.92); }
+    &__art-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 52%, rgba(35, 41, 74, 0.7)); }
+    &__art-caption { position: absolute; right: 1rem; bottom: 0.8rem; left: 1rem; color: $white; font-family: $font-display; font-size: 1.05rem; font-weight: 700; text-align: center; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); }
+    &__eyebrow { color: $gold-deep; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.04em; }
+    &__title { margin-top: 0.2rem; font-size: clamp(1.45rem, 3.4vw, 2.2rem); }
+    &__artist { color: rgba(35, 41, 74, 0.65); font-size: 0.95rem; }
+
+    &__timeline { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.7rem; margin-top: 1.3rem; color: rgba(35, 41, 74, 0.64); font-size: 0.78rem; }
+    input[type='range'] { width: 100%; accent-color: $pink-deep; cursor: pointer; }
+    &__controls { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.2rem; }
+    &__control { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border: 0; border-radius: 50%; color: $white; background: $pink-deep; box-shadow: 0 10px 24px -10px rgba(233, 127, 160, 0.85); cursor: pointer; transition: transform 0.25s ease; &:hover { transform: translateY(-2px); } }
+    &__play-icon { margin-left: 0.15rem; font-size: 1.05rem; }
+    &__volume { display: flex; align-items: center; gap: 0.5rem; min-width: 140px; color: $blue-deep; font-size: 0.8rem; }
+    &__download { padding: 0.62rem 1.1rem; margin-left: auto; font-size: 0.9rem; }
+    &__note { max-width: 720px; margin: 1.25rem auto 1.5rem; color: rgba(35, 41, 74, 0.68); font-size: 0.82rem; line-height: 1.8; text-align: center; & a { color: $pink-deep; font-weight: 700; text-decoration: underline; text-underline-offset: 0.18em; } }
+    &__playlist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 920px; margin: 0 auto; }
+    &__track { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.1rem; text-align: left; border: 1px solid rgba(198, 168, 117, 0.28); border-radius: 1rem; color: $ink; background: rgba(255, 253, 249, 0.58); cursor: pointer; transition: border-color 0.25s ease, background-color 0.25s ease; &:hover, &.is-active { border-color: rgba(233, 127, 160, 0.65); background: rgba(244, 162, 184, 0.13); } }
+    &__track-number { color: $gold-deep; font-family: $font-display; font-weight: 700; }
+    &__track-copy { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; font-family: $font-display; strong { font-size: 1rem; font-weight: 700; } small { color: rgba(35, 41, 74, 0.6); font-family: $font-body; font-size: 0.75rem; } }
+    &__track-action { margin-left: auto; color: $pink-deep; }
+
+    @media (max-width: 680px) { &__player { grid-template-columns: 1fr; } &__art { max-width: 170px; } &__playlist { grid-template-columns: 1fr; } &__download { margin-left: 0; } }
+  }
+</style>
+
+<script>
+  const player = document.querySelector('[data-player]');
+  const audio = player?.querySelector('[data-audio]') as HTMLAudioElement | null;
+  const playButton = player?.querySelector('[data-play]') as HTMLButtonElement | null;
+  const playIcon = player?.querySelector('.music__play-icon');
+  const progress = player?.querySelector('[data-progress]') as HTMLInputElement | null;
+  const volume = player?.querySelector('[data-volume]') as HTMLInputElement | null;
+  const currentTime = player?.querySelector('[data-current-time]');
+  const duration = player?.querySelector('[data-duration]');
+  const title = player?.querySelector('[data-current-title]');
+  const download = player?.querySelector('[data-download]') as HTMLAnchorElement | null;
+  const tracks = document.querySelectorAll<HTMLButtonElement>('[data-track]');
+
+  const toBengaliDigits = (value: number) => Math.floor(value).toString().replace(/\d/g, (digit) => '০১২৩৪৫৬৭৮৯'[Number(digit)]);
+  const formatTime = (seconds: number) => `${toBengaliDigits(seconds / 60)}:${toBengaliDigits(seconds % 60).padStart(2, '০')}`;
+  const updatePlayState = () => { if (!audio || !playButton || !playIcon) return; const isPlaying = !audio.paused; playIcon.textContent = isPlaying ? 'Ⅱ' : '▶'; playButton.setAttribute('aria-label', isPlaying ? 'গান থামান' : 'গান চালান'); };
+
+  playButton?.addEventListener('click', () => { if (!audio) return; audio.paused ? audio.play() : audio.pause(); });
+  audio?.addEventListener('play', updatePlayState);
+  audio?.addEventListener('pause', updatePlayState);
+  audio?.addEventListener('loadedmetadata', () => { if (duration && audio) duration.textContent = formatTime(audio.duration); });
+  audio?.addEventListener('timeupdate', () => { if (!audio) return; if (progress) progress.value = audio.duration ? String((audio.currentTime / audio.duration) * 100) : '0'; if (currentTime) currentTime.textContent = formatTime(audio.currentTime); });
+  progress?.addEventListener('input', () => { if (audio?.duration) audio.currentTime = (Number(progress.value) / 100) * audio.duration; });
+  volume?.addEventListener('input', () => { if (audio) audio.volume = Number(volume.value); });
+  audio?.addEventListener('ended', updatePlayState);
+
+  tracks.forEach((track) => track.addEventListener('click', () => {
+    if (!audio) return;
+    tracks.forEach((item) => item.classList.remove('is-active'));
+    track.classList.add('is-active');
+    const source = track.dataset.src ?? '';
+    audio.src = source;
+    if (title) title.textContent = track.dataset.title ?? '';
+    if (download) { download.href = source; download.setAttribute('download', ''); }
+    audio.play();
+  }));
+</script>

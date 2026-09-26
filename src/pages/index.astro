@@ -4,12 +4,14 @@ import Hero from '../components/Hero.astro';
 import NamesSection from '../components/NamesSection.astro';
 import KrishnaLink from '../components/KrishnaLink.astro';
 import AboutSection from '../components/AboutSection.astro';
+import MusicSection from '../components/MusicSection.astro';
 
 export const prerender = true;
 ---
 
 <BaseLayout>
   <Hero />
+  <MusicSection />
   <NamesSection />
   <KrishnaLink />
   <AboutSection />
